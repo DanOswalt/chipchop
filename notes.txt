@@ -147,10 +147,13 @@ user: {
         tournamentId
         winnerDescription { winnerName + winnings }
         totalPlayers
-        buyin
         timestamp
     ]
-    templateSummaries
+    templateSummaries [
+        name
+        templateId
+        timestamp
+    ]
 }
 
 getAllTemplatesForHostId(hostId)

@@ -7,6 +7,7 @@ import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import HomePage from '../Home';
 import TemplatesPage from '../Templates';
+import ViewTemplate from '../ViewTemplate';
 
 
 import * as ROUTES from '../../constants/routes';
@@ -24,6 +25,7 @@ const App = () => (
       <Route path={ROUTES.SIGN_IN} component={SignInPage} />
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.TEMPLATES} component={TemplatesPage} />
+      <Route path={ROUTES.VIEWTEMPLATE} component={ViewTemplate} />
     </div>
   </Router>
 )

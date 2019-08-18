@@ -45,6 +45,10 @@ class Firebase {
   }
 
   doFetchUser = uid => this.db.collection("users").doc(uid).get();
+
+  doGetTemplateById = id => this.db.collection("templates").doc(id).get();
+
+  doCreateNewTemplate = template => this.db.collection("templates").doc(template.id);
 }
 
 export default Firebase;

@@ -26,8 +26,7 @@ const newUser = {
         name: "$40 game",
         status: "complete",
         id: 5
-    }
-],
+    }],
     players: []
 }
 

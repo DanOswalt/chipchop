@@ -10,7 +10,7 @@ const Templates = () => {
           return <h3>Loading...</h3>
         }
         const templates = user.templates.map(t => { 
-          return <li key={t.name}><Link to={"/home"}>{t.name}</Link></li>;
+          return <li key={t.name}><Link to={"/template/" + t.id}>{t.name}</Link></li>;
         })
 
         return ( user &&

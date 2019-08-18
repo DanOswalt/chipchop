@@ -6,3 +6,5 @@ export const TEMPLATES = '/templates';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const PASSWORD_FORGET = '/pw-forget';
+export const VIEWTEMPLATE = '/template/:id';
+export const CREATETEMPLATE = '/create-template';
