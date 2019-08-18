@@ -10,17 +10,27 @@ const withAuthentication = Component => {
 
       this.state = {
         authUser: null,
+        user: null
       };
     }
 
     componentDidMount() {
-      this.listener = this.props.firebase.auth.onAuthStateChanged(
-        authUser => {
-          authUser
-            ? this.setState({ authUser })
-            : this.setState({ authUser: null });
-        },
-      );
+      this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => { 
+        if (authUser) {
+          this.props.firebase.doFetchUser(authUser.uid).then(doc => {
+            if (doc.exists) {
+              const user = doc.data();
+              this.setState({ authUser, user });
+            } else {
+              console.log('authedUser, but not no account in app?')
+            }
+          }).catch(error => {
+            console.log(error);
+          })
+        } else {
+          this.setState({ authUser: null, user: null });
+        }
+      });
     }
 
     componentWillUnmount() {
@@ -29,7 +39,7 @@ const withAuthentication = Component => {
 
     render() {
       return (
-        <AuthUserContext.Provider value={this.state.authUser}>
+        <AuthUserContext.Provider value={this.state.user}>
           <Component {...this.props} />
         </AuthUserContext.Provider>
       );

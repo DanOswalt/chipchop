@@ -1,19 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SignOutButton from '../SignOut';
-import { AuthUserContext } from '../Session';
-
 import * as ROUTES from '../../constants/routes'; 
 
+import { AuthUserContext } from '../Session';
+
 const Navigation = () => (
-  <nav>
-    <h3>ChipChop</h3>
+  <div>
     <AuthUserContext.Consumer>
       {authUser =>
         authUser ? <NavigationAuth /> : <NavigationNonAuth />
       }
     </AuthUserContext.Consumer>
-  </nav>
+  </div>
 );
 
 const NavigationAuth = () => (

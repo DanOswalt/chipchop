@@ -38,10 +38,13 @@ class Firebase {
 
   // *** firestore API ***
   doCreateNewUser = (authUser, username) => {
+    console.log(authUser)
     const { uid, email } = authUser.user;
-    const newUser = { uid, email, ...NEWUSER }
-    this.db.collection("users").add(newUser);
+    const newUser = { uid, email, username, ...NEWUSER }
+    return this.db.collection("users").doc(uid).set(newUser);
   }
+
+  doFetchUser = uid => this.db.collection("users").doc(uid).get();
 }
 
 export default Firebase;

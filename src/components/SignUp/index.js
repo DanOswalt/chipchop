@@ -31,11 +31,11 @@ class SignUpFormBase extends Component {
     const { username, email, passwordOne } = this.state;
     const { firebase, history } = this.props
 
-    firebase
-      .doCreateUserWithEmailAndPassword(email, passwordOne)
-      .then(authUser => {
-        firebase.doCreateNewUser(authUser, username);
-        this.setState({ ...INITIAL_STATE });
+    firebase.doCreateUserWithEmailAndPassword(email, passwordOne)
+      .then((authUser) => {
+        return firebase.doCreateNewUser(authUser, username)
+      })
+      .then(() => {
         history.push(ROUTES.HOME);
       })
       .catch(error => {

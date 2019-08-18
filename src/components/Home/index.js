@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { withAuthentication } from '../Session';
-import { withFirebase } from '../Session';
+import { AuthUserContext } from '../Session';
 
 const MOCKTEMPLATES = [
   { name: "$5 turbo"},
@@ -10,22 +9,29 @@ const MOCKTEMPLATES = [
 ]
 
 const Home = (props) => {
+  const { user } = props;
   useEffect(() => {
     
   })
 
-  const { user, firebase } = props;
+  const templates = MOCKTEMPLATES.map(template => { 
+    return <li key={template.name}><Link to={"/home"}>{template.name}</Link></li>;
+  });
 
   return (
-    <div>
-      <h1>Home | {user && user.username}</h1>
-      <h3>QuickStart Templates</h3>
-      <ul>
-        {MOCKTEMPLATES.map(template => <li key={template.name}><Link to={"/home"}>{template.name}</Link></li>)}
-      </ul>
-      <button><Link to={"/home"}>Create New</Link></button>
-    </div>
+    <AuthUserContext.Consumer>
+      {user => user &&
+        (<div>
+          <h1>Home | {user && user.username}</h1>
+          <h3>QuickStart Templates</h3>
+          <ul>
+            {templates}
+          </ul>
+          <button><Link to={"/home"}>Create New</Link></button>
+        </div>)
+      }
+    </AuthUserContext.Consumer>
   );
 }
 
-export default withAuthentication(Home);
+export default Home;
