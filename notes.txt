@@ -132,6 +132,102 @@ Don't spend a lot of time styling until:
   - User cannot modify existing template?
   - User can delete a template
 
+firestore models:
+
+getHostById(hostId)
+createNewHost(hostId)
+
+user: {
+    email
+    username
+    hostId
+    tournamentSummaries [
+        status: {tournament statuses}
+        name
+        tournamentId
+        winnerDescription { winnerName + winnings }
+        totalPlayers
+        buyin
+        timestamp
+    ]
+    templateSummaries
+}
+
+getAllTemplatesForHostId(hostId)
+getTemplateById(hostId)
+createTemplate(Template)
+
+template: {
+    templateId (*docId)
+    creator (hostId)
+    timestamp
+    settings: {
+        blinds_structure: []
+        payout_structure: []
+        buyin
+        roundLength
+        startingChips
+    }
+}
+
+tournaments: {
+    tournamentId (*docId)
+    creator (hostId)
+    timestamp
+    template
+    settings: {
+        blinds_structure: []
+        payout_structure: []
+        buyin
+        roundLength
+        startingChips
+    }
+    state: {
+        status: {'opened', 'in-progress', 'completed', 'closed'}
+        registeredPlayers: [playerIds]
+        activePlayers: [Full Player Objects]
+        eliminatedPlayers: [Full Player Objects]
+        round
+        clock
+        prizePool
+    }
+}
+
+getAllPlayersForHostId(hostId)
+getPlayerById(playerId)
+registerNewPlayer(Player)
+
+players: {
+    playerId (*docId)
+    creator (hostId)
+    name
+    winnings (computed)
+    total spent (computed)
+    total won (computed)
+    tournaments played (computed)
+    best finish (computed)
+    best win (computed)
+}
+
+getAllPlayerResultSummariesForPlayerId(playerId)
+getPlayerResultsSummaryByTournamentId(tournamentId)
+
+playerResultSummaries {
+    playerId
+    tournamentId
+    name
+    date
+    finish
+    totalPlayers
+    buyin
+    winnings
+    profit
+}
+
+
+    
+}
+
 app
  |_ global data:
  |  host (user)
