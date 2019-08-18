@@ -1,0 +1,194 @@
+app component shouldn't be styled, dashboard style, make dashboard element
+
+the default view when starting the tournament will be the big timer
+with current and next blinds (and quick buttons)
+
+jumbotron (timer plus info on current tournament state)
+players (controls for who is in, who has paid)
+payout (info on prizes)
+tournament admin (settings, controls)
+dashboard (everything summarized)
+
+Tournament State:
+Date
+Name of tournament
+Round #
+Round timer
+Timer paused / playing
+Current blinds
+Next blinds
+Average Stack
+Total players count
+Remaining players count
+Total players list
+Remaining players list
+Results list
+Blind Structure
+Round time length
+Number of payouts
+Total prize pool
+List of who has paid
+How much each player has paid
+Number of total buyins
+Buyin amount
+
+Tournament History view (include a summary with stats)
+Individual Player History view
+All Players History view (include a summary with stats)
+Jumbotron view
+Tournament Settings (Create View)
+Tournament Settings (Modify View)
+Tournament Controls (start/pause/play/reset close-registrations complete)
+Prize Pool view
+Prize Pool Settings view (adjust structure, payouts, deals made)
+Players view
+Dashboard view (what about on mobile?)
+Splash page (not signed in)
+Login view
+Signup view
+Admin Default view (show thumbnails of latest tournaments, plus create new)
+
+Player=
+Name
+Date Created
+Tournament Ids
+
+Tournament=
+Name
+Type (Ring/Tourney?)
+Date Created/Opened
+Date Completed/Closed
+Round length
+Blind Structure
+Buyin
+Prize Structure
+Total Players
+Total $
+Total buyins
+Result Ids
+Player Ids
+
+Result=
+Player Id
+Buyin (with rebuys)
+Place finished
+Winnings
+
+State (opened, started, completed, closed)
+opened means the tournament has a name and an id, but has not been started
+started means the play button has been clicked
+completed means that play has finished, but editing/modifications can still be made (and will not show in history)
+closed means finalized, no more changes, will show in history
+
+Make prototype of the whole thing with the barest html and react components, very high level
+Make sure the firebase connections are working fine.
+Draw out all of the component views, for mobile and desktop.
+Don't spend a lot of time styling until:
+    Users can sign-in / sign-out
+    User can navigate to all views
+    Navigation display is cemented
+    A Tournament-template can be created and saved (not run, just created)
+    A Player can be created and saved.
+    A Tournament can be run and completed.
+    A Tournament result can be fetched from history.
+    A Tournament in progress can be fetched from history (in case connection lost, paused and not finished)
+
+- Draw out all views for mobile
+- Draw out all views for desktop
+- Decide navigation style (will it use a router?)
+* Create Host user for firebase Login
+- Create Splash view
+  - SignUp/SignIn buttons
+- Create SignUp/SignIn views
+  - Complete registration form with basic validation
+- Create Host default view
+  - New tournament-template button
+  - Template buttons (defaults)
+  - Space for opened / in-progress tournaments
+  - Space for closed / completed tournaments (thumbnail component)
+  - Tournament History Button (completed and closed only)
+  - Nav should have button for sign-out
+* Create Tournament object (serves as template also, isTemplate)
+- Create New Tournament Template view
+  - All settings for new tournament (except name)
+  - Custom blind-structure?
+  - Custom payout-structure?
+  - Buttons for save-as-template-and-start-new / save-template-only / start-new-without-template-save / cancel
+- Create Start new tournament view
+  - Input for name (with default given based on template)
+  - Button for open / back
+- Create placeholder for dashboard/jumbotron view (on open click)
+* Don't proceed until
+  - User can be created
+  - User can easily login / create account / log out
+  - User can see host view with create tournament button
+  - User can create a template
+  - User can create a template-and-open
+  - User can create a tournament-no-template
+  - User can view all created templates and opened tournaments from Host View
+  - User can click on a tournament-template and see settings
+  - User can duplicate an existing template
+  - User cannot save identical template
+  - User cannot modify existing template?
+  - User can delete a template
+
+app
+ |_ global data:
+ |  host (user)
+ |
+ |_ modules
+    |_ auth
+    |  |_ sign-in/sign-up
+    |
+    |_ home
+    |  |_ new-tourney-select
+    |     |_ create-new-type (edit)
+    |     |  |_ prize-pool-structure-editor
+    |     |  |_ blind-structure-editor
+    |     |
+    |     |_ existing-type (view)
+    |     |_ open-new-tournament
+    |   
+    |  |_ tourney-history (view-only)
+    |     |_ all-tournament-history-view
+    |        |_ tournament-result-view
+    |     |_ all-players-history-view
+    |
+    |  |_ player-manager
+    |     |_ all-players-view
+    |        |_ player-results-view
+    |        |_ create-player
+    |        |_ edit-player
+    |
+    |_ tournament (consistently saving progress)
+       |_ host-control-panel
+          |_ start/stop/reset clock
+          |_ start/close-registration/close
+          |_ buttons for modify payouts
+       |_ players
+          |_ active-players-list
+          |_ eliminated-players-list
+          |_ add-player-component
+             |_ player-lookup
+             |_ add-new-player
+          |_ player-in-list
+             |_ remove
+             |_ reinstate
+             |_ eliminate
+             |_ mark-as-paid
+             |_ rebuy
+       |_ status (live tournament summary)
+       |_ tourney specs (view-only)
+           |_ modify settings view? if not started?...
+       |_ payout
+           |_ modify payout view...
+       |_ jumbotron (big, simplified summary with clock, blinds, some details)
+
+
+
+
+
+
+
+
+
