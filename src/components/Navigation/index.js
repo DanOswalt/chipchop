@@ -6,13 +6,14 @@ import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
 
 const Navigation = () => (
-  <div>
+  <nav>
+    <h1>ChipChop</h1>
     <AuthUserContext.Consumer>
       {authUser =>
         authUser ? <NavigationAuth /> : <NavigationNonAuth />
       }
     </AuthUserContext.Consumer>
-  </div>
+  </nav>
 );
 
 const NavigationAuth = () => (

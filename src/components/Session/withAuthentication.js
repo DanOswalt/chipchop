@@ -10,7 +10,7 @@ const withAuthentication = Component => {
 
       this.state = {
         authUser: null,
-        user: null
+        session: null
       };
     }
 
@@ -20,15 +20,15 @@ const withAuthentication = Component => {
           this.props.firebase.doFetchUser(authUser.uid).then(doc => {
             if (doc.exists) {
               const user = doc.data();
-              this.setState({ authUser, user });
+              this.setState({ authUser, session: { user } });
             } else {
-              console.log('authedUser, but not no account in app?')
+              console.log('authedUser, but not no account in app?');
             }
           }).catch(error => {
             console.log(error);
           })
         } else {
-          this.setState({ authUser: null, user: null });
+          this.setState({ authUser: null, session: null });
         }
       });
     }
@@ -39,7 +39,7 @@ const withAuthentication = Component => {
 
     render() {
       return (
-        <AuthUserContext.Provider value={this.state.user}>
+        <AuthUserContext.Provider value={this.state.session}>
           <Component {...this.props} />
         </AuthUserContext.Provider>
       );

@@ -17,7 +17,7 @@ const Templates = () => {
           <div>
             <h1>Home | {user.username}</h1>
             <h3>Your Tournament Templates</h3>
-            <button><Link to={"/home"}>Create New Template</Link></button>
+            <button><Link to={"/create-template"}>Create New Template</Link></button>
             { templates.length > 0 && 
               <div>
                 <ul>

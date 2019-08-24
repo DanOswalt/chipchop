@@ -38,7 +38,6 @@ class Firebase {
 
   // *** firestore API ***
   doCreateNewUser = (authUser, username) => {
-    console.log(authUser)
     const { uid, email } = authUser.user;
     const newUser = { uid, email, username, ...NEWUSER }
     return this.db.collection("users").doc(uid).set(newUser);
@@ -48,7 +47,7 @@ class Firebase {
 
   doGetTemplateById = id => this.db.collection("templates").doc(id).get();
 
-  doCreateNewTemplate = template => this.db.collection("templates").doc(template.id);
+  doCreateNewTemplate = template => this.db.collection("templates").doc(template.id).set(template);
 }
 
 export default Firebase;

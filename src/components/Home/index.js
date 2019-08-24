@@ -5,14 +5,15 @@ import { AuthUserContext } from '../Session';
 const Home = () => {
   return (
     <AuthUserContext.Consumer>
-      {user => {
-        if (!user) {
+      {session => {
+        if (!session) {
           return <h3>Loading...</h3>
         }
         const populateTournamentListings = tournamentArray => tournamentArray.map(t => { 
           return <li key={t.name}><Link to={"/home"}>{t.name}</Link></li>;
         })
 
+        const { user } = session;
         const open = populateTournamentListings(user.tournaments.filter(t => t.status === "open"));
         const inprogress = populateTournamentListings(user.tournaments.filter(t => t.status === "inprogress"));
         const completed = populateTournamentListings(user.tournaments.filter(t => t.status === "complete"));
