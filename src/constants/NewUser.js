@@ -1,9 +1,9 @@
 const newUser = {
-    templates: [{
-        name: "$5 mini game",
+    templateSummaries: [{
+        templateName: "$5 mini game",
         id: "FErq3AZGyIRstq53aHlH"
     }],
-    tournaments: [{
+    tournamentSummaries: [{
         name: "$10 game",
         status: "complete",
         id: 1
@@ -27,7 +27,7 @@ const newUser = {
         status: "complete",
         id: 5
     }],
-    players: []
+    registeredPlayers: []
 }
 
 export default newUser;

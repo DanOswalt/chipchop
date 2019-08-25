@@ -14,13 +14,19 @@ const withAuthentication = Component => {
       };
     }
 
+    updateCache(cache) {
+      const { session } = this.state;
+      session.cache = cache;
+      this.setState(session);
+    }
+
     componentDidMount() {
       this.listener = this.props.firebase.auth.onAuthStateChanged(authUser => { 
         if (authUser) {
           this.props.firebase.doFetchUser(authUser.uid).then(doc => {
             if (doc.exists) {
               const user = doc.data();
-              this.setState({ authUser, session: { user } });
+              this.setState({ authUser, session: { user, cache: null, updateCache: this.updateCache } });
             } else {
               console.log('authedUser, but not no account in app?');
             }

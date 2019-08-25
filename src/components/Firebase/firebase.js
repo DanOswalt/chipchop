@@ -48,6 +48,8 @@ class Firebase {
   doGetTemplateById = id => this.db.collection("templates").doc(id).get();
 
   doCreateNewTemplate = template => this.db.collection("templates").doc(template.id).set(template);
+
+  doUserUpdate = user => this.db.collection("users").doc(user.uid).set(user)
 }
 
 export default Firebase;
