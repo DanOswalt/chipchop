@@ -8,7 +8,6 @@ import { AuthUserContext } from '../Session';
 
 const CreateTemplateForm = ({ firebase, history }) => {
   const session = useContext(AuthUserContext);
-  console.log(session)
   const { user } = session;
   const [ buyin, setBuyin ] = useState('');
   const [ startingChips, setStartingChips ] = useState('');
@@ -45,9 +44,9 @@ const CreateTemplateForm = ({ firebase, history }) => {
       user.templateSummaries.push(templateSummary);
       return firebase.doUserUpdate(user);
     }).then(() => {
-        history.push("/template/" + template.id);
+      history.push("/template/" + template.id);
     }).catch(error => {
-        console.log(error);
+      setError(error);
     });
   }
 
